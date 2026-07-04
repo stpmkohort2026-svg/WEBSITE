@@ -16,6 +16,11 @@
 </head>
 <body>
 
+  <div class="intro" id="intro" aria-hidden="true">
+    <div class="mark"><b class="gold-text">STPM 2026</b>Portal Rasmi Kohort</div>
+  </div>
+  <div class="progress" aria-hidden="true"></div>
+
   <div class="ambient"></div>
   <div class="grid-lines"></div>
 
@@ -45,12 +50,23 @@
 
   <main>
 
-    <!-- ============ HERO ============ -->
+    <!-- ============ HERO (video lambang sebagai header sinematik) ============ -->
     <section class="hero" id="utama">
-      <div class="wrap">
-        <img class="hero-crest" src="assets/img/logo.svg" alt="" aria-hidden="true">
+      <div class="hero-video" aria-hidden="true">
+        <video autoplay muted loop playsinline preload="auto" poster="assets/img/poster.jpg" disablepictureinpicture>
+          <source src="assets/video/logo-intro.mp4" type="video/mp4">
+        </video>
+      </div>
+      <canvas id="fx-dust" aria-hidden="true"></canvas>
+      <div class="wrap hero-content">
         <span class="eyebrow center">Sijil Tinggi Persekolahan Malaysia</span>
-        <h1 class="display">Portal Rasmi <span class="gold-text">Kohort STPM 2026</span></h1>
+        <h1 class="display split">
+          <span class="w" style="--i:0"><span>Portal</span></span>
+          <span class="w" style="--i:1"><span>Rasmi</span></span><br>
+          <span class="w" style="--i:2"><span class="gold-text">Kohort</span></span>
+          <span class="w" style="--i:3"><span class="gold-text">STPM</span></span>
+          <span class="w" style="--i:4"><span class="gold-text">2026</span></span>
+        </h1>
         <p class="lede">Platform rasmi komuniti Telegram <strong>@stpm20266</strong> — semua pengumuman, kalendar peperiksaan MPM, nota eksklusif dan alat pelajar, disusun kemas di satu tempat untuk generasi Tingkatan Enam paling berdaya saing.</p>
         <div class="hero-actions">
           <a class="btn btn-gold" href="https://t.me/stpm20266" target="_blank" rel="noopener">
@@ -65,7 +81,7 @@
           <div><b>100%</b><span>Percuma Untuk Ahli</span></div>
         </div>
       </div>
-      <div class="scroll-hint">Tatal</div>
+      <div class="scroll-hint" style="z-index:2">Tatal</div>
     </section>
 
     <!-- ============ COUNTDOWN ============ -->

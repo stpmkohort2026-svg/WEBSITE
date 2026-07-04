@@ -1,6 +1,6 @@
 # ✦ STPM 2026 Kohort Baharu — Portal Rasmi
 
-Website rasmi komuniti Telegram **[@stpm20266](https://t.me/stpm20266)** — direka dengan tema premium "Royal Academic" (biru gelap + emas champagne).
+Website rasmi komuniti Telegram **[@stpm20266](https://t.me/stpm20266)** — tema premium **"Royal Amethyst"** (ungu diraja + platinum) yang sepadan dengan video lambang rasmi, lengkap dengan header video sinematik dan VFX.
 
 ## Halaman
 
@@ -13,11 +13,24 @@ Website rasmi komuniti Telegram **[@stpm20266](https://t.me/stpm20266)** — dir
 
 ```
 assets/
-  css/style.css   — sistem reka bentuk penuh (responsif, animasi reveal, menu mobile)
-  js/main.js      — countdown, ribbon dinamik, animasi, navigasi
-  js/alat.js      — logik Kalkulator PNGK & Penjana Jadual Belajar
-  img/logo.svg    — lambang rasmi (SVG, boleh skala tanpa had)
+  css/style.css        — sistem reka bentuk penuh + VFX (responsif, animasi reveal, menu mobile)
+  js/main.js           — countdown, ribbon dinamik, VFX (habuk platinum, tilt 3D, progress bar), navigasi
+  js/alat.js           — logik Kalkulator PNGK & Penjana Jadual Belajar
+  img/logo.svg         — lambang statik (nav/footer/favicon)
+  img/poster.jpg       — poster video (paparan serta-merta & fallback)
+  video/logo-intro.mp4 — video lambang rasmi (header sinematik, autoplay senyap & berulang)
 ```
+
+## VFX yang disertakan
+
+- Header video sinematik dengan vignet + fade filem ke latar halaman
+- Tirai pembuka (intro overlay) dengan jenama
+- Headline muncul perkataan demi perkataan
+- Habuk platinum terapung (canvas, parallax mengikut kursor)
+- Sempadan cahaya berputar pada kad countdown + denyut nombor setiap saat
+- Kad 3D tilt mengikut kursor dengan cahaya sorot
+- Kilauan menyapu butang utama & bar kemajuan skrol
+- Semua animasi dimatikan secara automatik untuk `prefers-reduced-motion`
 
 ## Deploy
 
