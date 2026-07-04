@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none" role="img" aria-label="Lambang Rasmi STPM 2026">
+  <defs>
+    <linearGradient id="gold" x1="30" y1="20" x2="170" y2="185" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f4f1fc"/>
+      <stop offset=".45" stop-color="#c9bfe8"/>
+      <stop offset=".75" stop-color="#7b64b8"/>
+      <stop offset="1" stop-color="#e4dcf6"/>
+    </linearGradient>
+    <linearGradient id="goldSoft" x1="0" y1="0" x2="200" y2="200" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ded4f2"/>
+      <stop offset="1" stop-color="#8d78c6"/>
+    </linearGradient>
+    <radialGradient id="ink" cx="50%" cy="38%" r="75%">
+      <stop offset="0" stop-color="#2b1a55"/>
+      <stop offset="1" stop-color="#0c0618"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Outer seal rings -->
+  <circle cx="100" cy="100" r="97" fill="url(#ink)"/>
+  <circle cx="100" cy="100" r="96" stroke="url(#gold)" stroke-width="2.5"/>
+  <circle cx="100" cy="100" r="88" stroke="url(#goldSoft)" stroke-width=".8" opacity=".85"/>
+
+  <!-- Ring lettering -->
+  <path id="arcTop" d="M100 22a78 78 0 0 1 78 78" fill="none"/>
+  <path id="arcTopFull" d="M26 100a74 74 0 0 1 148 0" fill="none"/>
+  <path id="arcBottom" d="M30 100a70 70 0 0 0 140 0" fill="none"/>
+  <text font-family="Georgia, 'Times New Roman', serif" font-size="11.5" letter-spacing="3.2" fill="url(#goldSoft)">
+    <textPath href="#arcTopFull" startOffset="50%" text-anchor="middle">PORTAL RASMI KOHORT</textPath>
+  </text>
+  <text font-family="Georgia, 'Times New Roman', serif" font-size="11.5" letter-spacing="4" fill="url(#goldSoft)">
+    <textPath href="#arcBottom" startOffset="50%" text-anchor="middle">SIJIL TINGGI PERSEKOLAHAN</textPath>
+  </text>
+
+  <!-- Side stars -->
+  <path d="M23 100l3.2-1.2L27.4 96l1.2 2.8 3.2 1.2-3.2 1.2-1.2 2.8-1.2-2.8z" fill="url(#goldSoft)"/>
+  <path d="M168 100l3.2-1.2 1.2-2.8 1.2 2.8 3.2 1.2-3.2 1.2-1.2 2.8-1.2-2.8z" fill="url(#goldSoft)"/>
+
+  <!-- Inner medallion -->
+  <circle cx="100" cy="100" r="62" fill="#140b2c"/>
+  <circle cx="100" cy="100" r="62" stroke="url(#gold)" stroke-width="1.6"/>
+  <circle cx="100" cy="100" r="57.5" stroke="url(#goldSoft)" stroke-width=".6" opacity=".7"/>
+
+  <!-- Laurel branches -->
+  <g stroke="url(#goldSoft)" stroke-width="1.6" stroke-linecap="round" fill="none">
+    <path d="M58 128c-8-10-11-24-8-37"/>
+    <path d="M142 128c8-10 11-24 8-37"/>
+  </g>
+  <g fill="url(#goldSoft)">
+    <path d="M52 118c-4-1-7-4-8-8 4 0 8 3 8 8z"/>
+    <path d="M49 106c-4-1-6-5-6-9 4 1 7 4 6 9z"/>
+    <path d="M48 94c-3-2-5-6-4-10 4 2 6 6 4 10z"/>
+    <path d="M56 125c-1-4 1-8 4-11 1 4 0 9-4 11z"/>
+    <path d="M52 114c-1-4 0-8 3-11 2 4 1 8-3 11z"/>
+    <path d="M50 102c0-4 2-8 5-10 1 4-1 8-5 10z"/>
+    <path d="M148 118c4-1 7-4 8-8-4 0-8 3-8 8z"/>
+    <path d="M151 106c4-1 6-5 6-9-4 1-7 4-6 9z"/>
+    <path d="M152 94c3-2 5-6 4-10-4 2-6 6-4 10z"/>
+    <path d="M144 125c1-4-1-8-4-11-1 4 0 9 4 11z"/>
+    <path d="M148 114c1-4 0-8-3-11-2 4-1 8 3 11z"/>
+    <path d="M150 102c0-4-2-8-5-10-1 4 1 8 5 10z"/>
+  </g>
+
+  <!-- Mortarboard -->
+  <g>
+    <path d="M100 55l30 11-30 11-30-11z" fill="url(#gold)"/>
+    <path d="M100 60.5l17 6.2-17 6.2-17-6.2z" fill="#140b2c" opacity=".35"/>
+    <path d="M85 71v8c0 4.4 6.7 8 15 8s15-3.6 15-8v-8l-15 5.5z" fill="url(#goldSoft)"/>
+    <path d="M127 67v13" stroke="url(#goldSoft)" stroke-width="1.6" stroke-linecap="round"/>
+    <circle cx="127" cy="82" r="2.2" fill="url(#goldSoft)"/>
+  </g>
+
+  <!-- Wordmark -->
+  <text x="100" y="112" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="24" font-weight="700" letter-spacing="4.5" fill="url(#gold)">STPM</text>
+  <path d="M66 120h26M108 120h26" stroke="url(#goldSoft)" stroke-width=".8" opacity=".8"/>
+  <path d="M100 117l2.6 2.6-2.6 2.6-2.6-2.6z" fill="url(#goldSoft)"/>
+  <text x="100" y="138" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="15" letter-spacing="6" fill="url(#goldSoft)">2026</text>
+  <text x="100" y="151" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="6.5" letter-spacing="2.6" fill="#b3a4dd" opacity=".9">MMXXVI</text>
+</svg>
