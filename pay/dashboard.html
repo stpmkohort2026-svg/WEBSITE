@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Penjual — STPM Kohort 20266 Pay</title>
+  <meta name="description" content="Dashboard penjual STPM Kohort 20266 Pay — urus pautan jualan, kaedah payout dan transaksi anda.">
+  <meta name="robots" content="noindex">
+  <link rel="icon" type="image/svg+xml" href="../assets/img/logo.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,570;9..144,640;9..144,700&family=Manrope:wght@400;450;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/pay.css">
+</head>
+<body>
+
+  <div class="ambient"></div>
+  <div class="grid-lines"></div>
+
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="index.html">
+        <img src="../assets/img/logo.svg" alt="Lambang STPM Kohort 20266" width="52" height="52">
+        <span class="brand-name">Kohort <span class="gold-text">Pay</span><span class="brand-sub">Dashboard Penjual</span></span>
+      </a>
+      <div class="nav-cta">
+        <a class="btn btn-ghost btn-sm" href="index.html">Halaman Utama</a>
+        <button class="btn btn-ghost btn-sm" id="btn-lock-now" type="button" hidden>🔒 Kunci</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ SKRIN KUNCI ============ -->
+  <div class="lock-wrap" id="lock">
+    <div class="lock-card">
+      <div class="lock-ic">🔐</div>
+
+      <div id="lock-setup" hidden>
+        <h1 class="display">Selamat Datang, Penjual</h1>
+        <p>Tetapkan PIN 4–8 digit untuk mengunci dashboard pada peranti ini. Anda juga boleh teruskan tanpa PIN.</p>
+        <input type="password" inputmode="numeric" autocomplete="off" maxlength="8" class="pin-input" id="pin-new" placeholder="••••">
+        <div class="co-cta">
+          <button class="btn btn-gold btn-block" id="btn-pin-set" type="button">Tetapkan PIN &amp; Masuk</button>
+          <button class="btn btn-ghost btn-block" id="btn-pin-skip" type="button">Teruskan Tanpa PIN</button>
+        </div>
+      </div>
+
+      <div id="lock-enter" hidden>
+        <h1 class="display">Dashboard Dikunci</h1>
+        <p>Masukkan PIN anda untuk membuka dashboard penjual.</p>
+        <input type="password" inputmode="numeric" autocomplete="off" maxlength="8" class="pin-input" id="pin-enter" placeholder="••••">
+        <div class="co-cta">
+          <button class="btn btn-gold btn-block" id="btn-pin-unlock" type="button">Buka Kunci</button>
+        </div>
+        <p style="margin-top:1.1rem;font-size:.74rem">Lupa PIN? Data hanya pada peranti ini — <button type="button" id="btn-pin-reset" style="background:none;border:0;color:var(--gold-400);cursor:pointer;font:inherit;text-decoration:underline">padam semua data</button> untuk mula semula.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============ APP ============ -->
+  <div class="app-shell" id="app" hidden>
+
+    <aside class="side">
+      <div class="side-title">Menu Penjual</div>
+      <nav class="side-nav" id="side-nav">
+        <button data-pane="overview" class="active" type="button"><span class="ic">◈</span>Ringkasan</button>
+        <button data-pane="links" type="button"><span class="ic">🔗</span>Pautan Jualan<span class="n" id="n-links">0</span></button>
+        <button data-pane="payouts" type="button"><span class="ic">💸</span>Payout<span class="n" id="n-payouts">0</span></button>
+        <button data-pane="orders" type="button"><span class="ic">🧾</span>Transaksi<span class="n" id="n-orders">0</span></button>
+        <button data-pane="settings" type="button"><span class="ic">⚙️</span>Tetapan</button>
+      </nav>
+    </aside>
+
+    <div class="main-pane">
+
+      <!-- ===== RINGKASAN ===== -->
+      <section class="pane active" id="pane-overview">
+        <div class="pane-head">
+          <div>
+            <h2>Ringkasan <span class="gold-text" id="ov-shop"></span></h2>
+            <p id="ov-tagline"></p>
+          </div>
+          <div style="display:flex;gap:.6rem;flex-wrap:wrap">
+            <button class="ibtn gold" id="btn-new-link-ov" type="button">＋ Cipta Pautan</button>
+            <button class="ibtn" id="btn-new-payout-ov" type="button">＋ Tambah Payout</button>
+          </div>
+        </div>
+
+        <div class="stat-grid">
+          <div class="stat hot"><div class="lbl">Kutipan Disahkan</div><div class="val" id="st-total">RM 0.00</div><div class="sub" id="st-total-sub">0 transaksi</div></div>
+          <div class="stat"><div class="lbl">Menunggu Pengesahan</div><div class="val" id="st-pending">0</div><div class="sub" id="st-pending-sub">RM 0.00</div></div>
+          <div class="stat"><div class="lbl">Pautan Aktif</div><div class="val" id="st-links">0</div><div class="sub">sedia dikongsi</div></div>
+          <div class="stat"><div class="lbl">Kaedah Payout</div><div class="val" id="st-payouts">0</div><div class="sub" id="st-payouts-sub">bank · TNG · QR</div></div>
+        </div>
+
+        <div class="panel">
+          <h3>Kutipan 14 Hari Terakhir</h3>
+          <p class="hint">Jumlah transaksi yang disahkan setiap hari.</p>
+          <canvas id="kp-chart" height="170"></canvas>
+        </div>
+
+        <div class="panel">
+          <h3>Transaksi Terkini</h3>
+          <p class="hint">5 rekod terbaru — pergi ke tab Transaksi untuk senarai penuh.</p>
+          <div class="item-list" id="ov-recent"></div>
+        </div>
+      </section>
+
+      <!-- ===== PAUTAN JUALAN ===== -->
+      <section class="pane" id="pane-links">
+        <div class="pane-head">
+          <div>
+            <h2>Pautan <span class="gold-text">Jualan</span></h2>
+            <p>Setiap produk / kutipan mempunyai pautan checkout &amp; kod QR sendiri.</p>
+          </div>
+          <button class="ibtn gold" id="btn-new-link" type="button">＋ Cipta Pautan</button>
+        </div>
+        <div class="item-list" id="list-links"></div>
+      </section>
+
+      <!-- ===== PAYOUT ===== -->
+      <section class="pane" id="pane-payouts">
+        <div class="pane-head">
+          <div>
+            <h2>Kaedah <span class="gold-text">Payout</span></h2>
+            <p>Ke mana wang anda masuk — bank, TNG eWallet, DuitNow QR atau gerbang FPX/kad. Pembeli hanya nampak apa yang anda benarkan.</p>
+          </div>
+          <button class="ibtn gold" id="btn-new-payout" type="button">＋ Tambah Payout</button>
+        </div>
+        <div class="item-list" id="list-payouts"></div>
+      </section>
+
+      <!-- ===== TRANSAKSI ===== -->
+      <section class="pane" id="pane-orders">
+        <div class="pane-head">
+          <div>
+            <h2>Rekod <span class="gold-text">Transaksi</span></h2>
+            <p>Sahkan pesanan selepas anda menerima bayaran sebenar dalam akaun anda.</p>
+          </div>
+          <button class="ibtn gold" id="btn-import-order" type="button">📥 Import Kod Pesanan</button>
+        </div>
+        <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.1rem" id="order-filters">
+          <button class="ibtn active-f" data-f="all" type="button">Semua</button>
+          <button class="ibtn" data-f="pending" type="button">Menunggu</button>
+          <button class="ibtn" data-f="paid" type="button">Disahkan</button>
+          <button class="ibtn" data-f="cancelled" type="button">Dibatal</button>
+        </div>
+        <div class="item-list" id="list-orders"></div>
+      </section>
+
+      <!-- ===== TETAPAN ===== -->
+      <section class="pane" id="pane-settings">
+        <div class="pane-head">
+          <div>
+            <h2>Tetapan <span class="gold-text">Kedai</span></h2>
+            <p>Identiti awam, saluran notifikasi dan keselamatan peranti.</p>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3>Profil Awam</h3>
+          <p class="hint">Hanya maklumat di bawah dipaparkan kepada pembeli — bukan nama sebenar anda.</p>
+          <div class="f-grid">
+            <div>
+              <label class="f-label" for="set-shop">Nama Kedai (dipaparkan)</label>
+              <input class="field" id="set-shop" maxlength="40" placeholder="cth: Kedai Kohort 20266">
+            </div>
+            <div>
+              <label class="f-label" for="set-tagline">Tagline</label>
+              <input class="field" id="set-tagline" maxlength="60" placeholder="cth: Merchandise rasmi kohort">
+            </div>
+            <div>
+              <label class="f-label" for="set-wa">No. WhatsApp (terima pesanan)</label>
+              <input class="field" id="set-wa" inputmode="tel" placeholder="cth: 0123456789">
+              <div class="f-help">Pembeli akan hantar kod pesanan &amp; resit ke nombor ini. Nombor tidak dipaparkan di halaman — hanya butang WhatsApp.</div>
+            </div>
+            <div>
+              <label class="f-label" for="set-tg">Username Telegram</label>
+              <input class="field" id="set-tg" placeholder="cth: stpm20266">
+            </div>
+          </div>
+          <div class="modal-acts" style="justify-content:flex-start">
+            <button class="ibtn gold" id="btn-save-profile" type="button">Simpan Profil</button>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3>PIN Peranti</h3>
+          <p class="hint">Kunci dashboard pada peranti ini. (Nota: ini kunci skrin peranti, bukan keselamatan pelayan.)</p>
+          <div class="f-grid">
+            <div>
+              <label class="f-label" for="set-pin">PIN Baharu (4–8 digit)</label>
+              <input class="field" id="set-pin" type="password" inputmode="numeric" maxlength="8" placeholder="Kosongkan untuk buang PIN">
+            </div>
+          </div>
+          <div class="modal-acts" style="justify-content:flex-start">
+            <button class="ibtn gold" id="btn-save-pin" type="button">Kemas Kini PIN</button>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3>Sandaran &amp; Data</h3>
+          <p class="hint">Data anda hanya pada peranti ini. Eksport sandaran sebelum tukar peranti atau padam pelayar.</p>
+          <div class="modal-acts" style="justify-content:flex-start">
+            <button class="ibtn" id="btn-export" type="button">⬇ Eksport Sandaran (JSON)</button>
+            <button class="ibtn" id="btn-import" type="button">⬆ Import Sandaran</button>
+            <input type="file" id="file-import" accept="application/json,.json" hidden>
+            <button class="ibtn" id="btn-demo" type="button">✨ Isi Data Demo</button>
+            <button class="ibtn danger" id="btn-wipe" type="button">🗑 Padam Semua Data</button>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- ============ MODAL: PRODUK / PAUTAN ============ -->
+  <div class="modal-back" id="m-product">
+    <div class="modal">
+      <h3 id="mp-title">Cipta Pautan Jualan</h3>
+      <p class="hint">Pautan checkout dijana secara automatik — kongsi di mana-mana.</p>
+      <div class="f-grid">
+        <div class="full">
+          <label class="f-label" for="mp-name">Nama Produk / Kutipan</label>
+          <input class="field" id="mp-name" maxlength="80" placeholder="cth: Baju Kohort 20266 Edisi Terhad">
+        </div>
+        <div class="full">
+          <label class="f-label">Jenis Harga</label>
+          <div class="seg" id="mp-pricetype">
+            <button type="button" data-v="fixed" class="active">Harga Tetap</button>
+            <button type="button" data-v="open">Jumlah Terbuka</button>
+          </div>
+        </div>
+        <div id="mp-fixed-wrap">
+          <label class="f-label" for="mp-price">Harga (RM)</label>
+          <input class="field" id="mp-price" type="number" min="0" step="0.01" placeholder="35.00">
+        </div>
+        <div id="mp-open-wrap" hidden>
+          <label class="f-label" for="mp-min">Minimum (RM)</label>
+          <input class="field" id="mp-min" type="number" min="0" step="0.01" placeholder="1.00">
+        </div>
+        <div class="full">
+          <label class="f-label" for="mp-desc">Keterangan (pilihan)</label>
+          <textarea class="field" id="mp-desc" maxlength="200" placeholder="Butiran ringkas untuk pembeli"></textarea>
+        </div>
+        <div class="full">
+          <label class="f-label">Gambar (pilihan)</label>
+          <div class="qr-drop" id="mp-imgdrop"><b>Klik untuk pilih gambar</b>Dimampatkan automatik supaya pautan kekal ringan</div>
+          <input type="file" id="mp-imgfile" accept="image/*" hidden>
+          <div class="qr-preview" id="mp-imgprev">
+            <img id="mp-imgprev-img" alt="Pratonton gambar">
+            <div class="st"><b>Gambar sedia</b><span id="mp-imgprev-size"></span></div>
+            <button class="ibtn danger" id="mp-imgremove" type="button" style="margin-left:auto">Buang</button>
+          </div>
+        </div>
+        <div class="full switch-row">
+          <div class="sw-meta"><b>Benarkan kuantiti</b><span>Pembeli boleh pilih bilangan unit (harga tetap sahaja)</span></div>
+          <input type="checkbox" class="switch" id="mp-qty">
+        </div>
+        <div class="full">
+          <label class="f-label">Kaedah Bayaran Untuk Pautan Ini</label>
+          <div class="item-list" id="mp-methods" style="gap:.5rem"></div>
+          <div class="f-help">Tanda kaedah yang dibenarkan. Jika tiada payout lagi, tambah di tab Payout dahulu.</div>
+        </div>
+      </div>
+      <div class="modal-acts">
+        <button class="ibtn" data-close type="button">Batal</button>
+        <button class="ibtn gold" id="mp-save" type="button">Simpan Pautan</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ MODAL: PAYOUT ============ -->
+  <div class="modal-back" id="m-payout">
+    <div class="modal">
+      <h3 id="mo-title">Tambah Kaedah Payout</h3>
+      <p class="hint">Maklumat sensitif kekal pada peranti anda — hanya perkara yang perlu untuk bayaran dimasukkan ke dalam pautan.</p>
+      <div class="f-grid">
+        <div class="full">
+          <label class="f-label" for="mo-type">Jenis</label>
+          <select class="field" id="mo-type">
+            <option value="duitnow">DuitNow QR (imbas — paling anonim)</option>
+            <option value="tng">TNG eWallet</option>
+            <option value="bank">Akaun Bank (pindahan manual)</option>
+            <option value="gw">Gerbang FPX / Kad (ToyyibPay, Billplz…)</option>
+          </select>
+        </div>
+
+        <div class="full">
+          <label class="f-label" for="mo-label">Label (untuk rujukan anda)</label>
+          <input class="field" id="mo-label" maxlength="40" placeholder="cth: Akaun utama">
+        </div>
+
+        <!-- medan QR (duitnow / tng) -->
+        <div class="full" id="mo-qr-wrap">
+          <label class="f-label">Muat Naik Imej QR Anda</label>
+          <div class="qr-drop" id="mo-qrdrop"><b>Klik / seret imej QR ke sini</b>Screenshot QR DuitNow atau TNG daripada app bank / e-wallet anda</div>
+          <input type="file" id="mo-qrfile" accept="image/*" hidden>
+          <div class="qr-preview" id="mo-qrprev">
+            <img id="mo-qrprev-img" alt="Pratonton QR">
+            <div class="st"><b id="mo-qrprev-t">QR sedia</b><span id="mo-qrprev-s"></span></div>
+            <button class="ibtn danger" id="mo-qrremove" type="button" style="margin-left:auto">Buang</button>
+          </div>
+        </div>
+
+        <!-- medan TNG -->
+        <div class="full" id="mo-tng-wrap" hidden>
+          <label class="f-label" for="mo-phone">No. Telefon TNG (pilihan)</label>
+          <input class="field" id="mo-phone" inputmode="tel" placeholder="cth: 0123456789">
+          <div class="f-help">Dipaparkan sebagai alternatif jika pembeli tidak dapat imbas QR.</div>
+        </div>
+
+        <!-- medan bank -->
+        <div id="mo-bank-wrap" class="full" hidden>
+          <div class="f-grid">
+            <div>
+              <label class="f-label" for="mo-bank">Bank</label>
+              <select class="field" id="mo-bank"></select>
+            </div>
+            <div>
+              <label class="f-label" for="mo-acc">No. Akaun</label>
+              <input class="field" id="mo-acc" inputmode="numeric" placeholder="cth: 1122334455">
+            </div>
+            <div class="full">
+              <label class="f-label" for="mo-holder">Nama Pemegang (rujukan anda)</label>
+              <input class="field" id="mo-holder" maxlength="60" placeholder="Nama penuh pada akaun">
+            </div>
+            <div class="full switch-row">
+              <div class="sw-meta"><b>Papar nama kepada pembeli</b><span>Biar tertutup untuk kekal anonim (lalai: tersembunyi)</span></div>
+              <input type="checkbox" class="switch" id="mo-showname">
+            </div>
+          </div>
+        </div>
+
+        <!-- medan gateway -->
+        <div class="full" id="mo-gw-wrap" hidden>
+          <label class="f-label" for="mo-gwurl">URL Halaman Bayaran Gerbang</label>
+          <input class="field" id="mo-gwurl" type="url" placeholder="https://toyyibpay.com/xxxx">
+          <div class="f-help">Daftar percuma di ToyyibPay / Billplz / SecurePay, cipta halaman bayaran, tampal pautannya di sini. Pilihan “FPX / Kad” akan muncul di checkout.</div>
+        </div>
+      </div>
+      <div class="modal-acts">
+        <button class="ibtn" data-close type="button">Batal</button>
+        <button class="ibtn gold" id="mo-save" type="button">Simpan Payout</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ MODAL: KONGSI ============ -->
+  <div class="modal-back" id="m-share">
+    <div class="modal">
+      <h3>Kongsi Pautan Bayaran</h3>
+      <p class="hint" id="ms-prodname"></p>
+      <div class="qr-stage" style="margin-bottom:1.2rem"><img id="ms-qr" alt="QR pautan bayaran"></div>
+      <div class="copy-field">
+        <input id="ms-url" readonly>
+        <button class="ibtn gold" id="ms-copy" type="button">Salin</button>
+      </div>
+      <div class="modal-acts" style="justify-content:center">
+        <a class="ibtn" id="ms-wa" target="_blank" rel="noopener">Kongsi WhatsApp</a>
+        <a class="ibtn" id="ms-tg" target="_blank" rel="noopener">Kongsi Telegram</a>
+        <a class="ibtn" id="ms-dlqr" download="kohortpay-qr.png">Muat Turun QR</a>
+        <a class="ibtn" id="ms-open" target="_blank" rel="noopener">Buka Checkout</a>
+      </div>
+      <div class="modal-acts">
+        <button class="ibtn" data-close type="button">Tutup</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ MODAL: IMPORT PESANAN ============ -->
+  <div class="modal-back" id="m-import">
+    <div class="modal">
+      <h3>Import Kod Pesanan</h3>
+      <p class="hint">Tampal mesej / kod <b>KPORD1.</b> yang dihantar pembeli melalui WhatsApp atau Telegram.</p>
+      <textarea class="field" id="mi-text" style="min-height:130px" placeholder="Tampal keseluruhan mesej pembeli di sini…"></textarea>
+      <div class="modal-acts">
+        <button class="ibtn" data-close type="button">Batal</button>
+        <button class="ibtn gold" id="mi-save" type="button">Import Pesanan</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../assets/js/vendor/lz-string.min.js"></script>
+  <script src="../assets/js/vendor/qrcode.js"></script>
+  <script src="../assets/js/vendor/jsQR.js"></script>
+  <script src="../assets/js/pay-core.js"></script>
+  <script src="../assets/js/pay-dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bayaran Selamat — STPM Kohort 20266 Pay</title>
+  <meta name="description" content="Halaman bayaran selamat STPM Kohort 20266 Pay — DuitNow QR, FPX, pindahan bank, kad & TNG eWallet.">
+  <meta name="robots" content="noindex">
+  <link rel="icon" type="image/svg+xml" href="../assets/img/logo.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,570;9..144,640;9..144,700&family=Manrope:wght@400;450;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/pay.css">
+</head>
+<body>
+
+  <div class="ambient"></div>
+  <div class="grid-lines"></div>
+
+  <div class="co-wrap">
+
+    <div class="co-brandbar">
+      <img src="../assets/img/logo.svg" alt="Lambang STPM Kohort 20266">
+      <div class="t"><b>Kohort <span class="gold-text">Pay</span></b><span>STPM Kohort 20266</span></div>
+    </div>
+
+    <!-- ===== PAUTAN TIDAK SAH ===== -->
+    <div class="co-card" id="stage-invalid" hidden>
+      <div class="co-body" style="text-align:center;padding:3rem 1.8rem">
+        <div style="font-size:2.6rem;margin-bottom:1rem">🔍</div>
+        <h1 class="display" style="font-size:1.5rem;margin-bottom:.6rem">Pautan Bayaran Tidak Sah</h1>
+        <p style="color:var(--muted);font-size:.9rem">Pautan ini rosak atau tidak lengkap. Minta penjual hantar pautan penuh sekali lagi — pastikan keseluruhan pautan disalin.</p>
+        <div class="co-cta" style="margin-top:1.8rem">
+          <a class="btn btn-ghost btn-block" href="index.html">Ke Halaman Utama Kohort Pay</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== KAD BAYARAN ===== -->
+    <div class="co-card" id="co-card" hidden>
+
+      <div id="demo-band" hidden style="background:var(--warn-dim);border-bottom:1px solid rgba(240,195,105,.35);color:var(--warn);font-size:.72rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;text-align:center;padding:.5rem 1rem">
+        Mod demo — jangan buat bayaran sebenar
+      </div>
+
+      <div class="co-head">
+        <div class="thumb" id="co-thumb">🛍️</div>
+        <div>
+          <h1 id="co-name">—</h1>
+          <div class="d" id="co-desc"></div>
+        </div>
+      </div>
+
+      <div class="co-seller">
+        <span class="dot"></span>
+        <span>Penjual: <b id="co-seller">—</b> · Identiti dilindungi <span title="Butiran peribadi penjual tidak dipaparkan">🕶️</span></span>
+      </div>
+
+      <!-- ----- PERINGKAT 1: BAYAR ----- -->
+      <div class="co-body" id="stage-pay">
+
+        <div class="co-amount-row">
+          <div>
+            <div class="lbl">Jumlah Perlu Dibayar</div>
+            <div class="co-amount" id="co-amount">RM 0.00</div>
+          </div>
+          <div class="qty-ctl" id="qty-ctl" hidden>
+            <button type="button" id="qty-minus" aria-label="Kurang">−</button>
+            <b id="qty-val">1</b>
+            <button type="button" id="qty-plus" aria-label="Tambah">＋</button>
+          </div>
+        </div>
+
+        <div id="open-amount-wrap" hidden style="margin-bottom:1.4rem">
+          <label class="f-label" for="open-amount">Masukkan Jumlah (RM)</label>
+          <input class="field" type="number" id="open-amount" min="1" step="0.01" placeholder="0.00">
+          <div class="f-help" id="open-amount-help"></div>
+        </div>
+
+        <div class="lbl" style="font-size:.68rem;font-weight:800;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);margin-bottom:.8rem">Pilih Kaedah Bayaran</div>
+        <div class="pm-list" id="pm-list"></div>
+
+        <div class="pay-panel" id="pay-panel"></div>
+
+        <div class="co-cta">
+          <button class="btn btn-gold btn-block" id="btn-paid" type="button">✓&nbsp; Saya Sudah Bayar</button>
+        </div>
+      </div>
+
+      <!-- ----- PERINGKAT 2: SAHKAN ----- -->
+      <div class="co-body" id="stage-confirm" hidden>
+        <h2 class="display" style="font-size:1.3rem;margin-bottom:.4rem">Hampir Siap! 🎉</h2>
+        <p style="color:var(--muted);font-size:.87rem;margin-bottom:1.4rem">Isi maklumat ringkas supaya penjual dapat mengesan bayaran anda.</p>
+        <div class="f-grid" style="grid-template-columns:1fr">
+          <div>
+            <label class="f-label" for="buyer-name">Nama / Nama Panggilan <span style="color:var(--bad)">*</span></label>
+            <input class="field" id="buyer-name" maxlength="40" placeholder="cth: Aina K.">
+          </div>
+          <div>
+            <label class="f-label" for="buyer-phone">No. Telefon (pilihan)</label>
+            <input class="field" id="buyer-phone" inputmode="tel" maxlength="15" placeholder="cth: 0123456789">
+          </div>
+          <div>
+            <label class="f-label" for="buyer-note">Nota kepada penjual (pilihan)</label>
+            <input class="field" id="buyer-note" maxlength="90" placeholder="cth: Saiz M, warna hitam">
+          </div>
+        </div>
+        <div class="co-cta">
+          <button class="btn btn-gold btn-block" id="btn-gen-order" type="button">Jana Kod Pesanan</button>
+          <button class="btn btn-ghost btn-block" id="btn-back-pay" type="button">← Kembali</button>
+        </div>
+      </div>
+
+      <!-- ----- PERINGKAT 3: SIAP ----- -->
+      <div class="co-body" id="stage-done" hidden>
+        <div class="done-stage">
+          <div class="done-ic">✓</div>
+          <h2 class="display" style="font-size:1.4rem">Pesanan Direkodkan!</h2>
+          <p style="color:var(--muted);font-size:.86rem;margin-top:.4rem">Kod pesanan anda:</p>
+          <div class="order-code-box" id="done-code">KP-XXXXX</div>
+          <p style="color:var(--muted);font-size:.84rem;margin-top:1rem">Langkah terakhir — <b style="color:var(--gold-200)">hantar kod pesanan kepada penjual</b> bersama resit/screenshot bayaran supaya pesanan anda disahkan.</p>
+        </div>
+        <div class="co-cta">
+          <a class="btn btn-gold btn-block" id="btn-send-wa" target="_blank" rel="noopener" hidden>
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.2 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.4-.7-2.9-1.2-4.7-4.1-4.9-4.3-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .6l-.4.6-.5.5c-.2.2-.3.4-.1.7.2.3.8 1.4 1.8 2.2 1.3 1.1 2.3 1.5 2.6 1.6.3.1.5.1.7-.1l1-1.2c.2-.3.4-.2.7-.1l2.2 1c.3.1.5.2.5.4.1 0 .1.7-.2 1.5z"/></svg>
+            Hantar Kepada Penjual (WhatsApp)
+          </a>
+          <a class="btn btn-gold btn-block" id="btn-send-tg" target="_blank" rel="noopener" hidden>
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.9 4.6 18.8 19c-.2 1-0.9 1.3-1.8.8l-4.7-3.5-2.3 2.2c-.3.3-.5.5-.9.5l.3-4.7L18 6.6c.4-.3-.1-.5-.6-.2L6.9 13l-4.5-1.4c-1-.3-1-1 .2-1.5L20.6 3.3c.8-.3 1.5.2 1.3 1.3z"/></svg>
+            Hantar Kepada Penjual (Telegram)
+          </a>
+          <button class="btn btn-ghost btn-block" id="btn-copy-order" type="button">Salin Mesej Pesanan</button>
+        </div>
+        <p style="color:var(--muted);font-size:.76rem;text-align:center;margin-top:1rem">Jangan lupa lampirkan resit bayaran anda sekali. Terima kasih! 💜</p>
+      </div>
+
+    </div>
+
+    <div class="co-foot">
+      <div class="secure-row">
+        <span class="secure-chip">🔒 Bayaran Terus Ke Penjual</span>
+        <span class="secure-chip">🕶️ Privasi Dilindungi</span>
+        <span class="secure-chip">◫ DuitNow</span>
+        <span class="secure-chip">💳 FPX &amp; Kad</span>
+      </div>
+      <p style="margin-top:1rem">Dikuasakan oleh <a href="index.html"><b>STPM Kohort 20266 Pay</b></a> — gerbang transaksi komuniti kohort.<br>Nak jual macam ini juga? <a href="dashboard.html">Buka dashboard penjual percuma</a>.</p>
+    </div>
+
+  </div>
+
+  <script src="../assets/js/vendor/lz-string.min.js"></script>
+  <script src="../assets/js/vendor/qrcode.js"></script>
+  <script src="../assets/js/pay-core.js"></script>
+  <script src="../assets/js/pay-checkout.js"></script>
+</body>
+</html>
